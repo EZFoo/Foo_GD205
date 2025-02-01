@@ -1,8 +1,8 @@
-Car c;
+Tank playerOne;
 
 void setup(){
-  size(1024, 1024);
-  c = new Car(random(width*.25, width*.75),
+  size(720, 720);
+  playerOne = new Tank(random(width*.25, width*.75),
               random(height*.25, height*.75));
 }
 
@@ -10,7 +10,7 @@ void setup(){
 void draw(){
   background(0);
   
-  c.display();
-  c.update();
+  playerOne.display();
+  playerOne.update();
   
 }
