@@ -20,7 +20,7 @@ class Tank {
 
   // METHODS
 
-  // draw the car at its current position
+  // draw the Tank at its current position
   void display() {
     rectMode(CENTER);
     translate(pos.x, pos.y);
@@ -30,7 +30,7 @@ class Tank {
     rect(10, 0, 70, 10);
   }
 
-  // update the position and state of the car
+  // update the position and state of the Tank
   // based on inputs
   void update() {
     // handle turning
