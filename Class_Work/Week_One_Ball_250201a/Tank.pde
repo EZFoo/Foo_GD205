@@ -1,11 +1,11 @@
 //https://github.com/mrfb/gd105-fall24/blob/main/Lecture%20Code/lecture_241113a_car/car.pde
 class Tank {
   // PROPERTIES
-  PVector pos;
+  PVector pos, heading;
   float speed;
-  PVector heading;
 
   // CONTRUCTORS
+ //Overload
   Tank() {
     pos = new PVector(random(width), random(width));
     speed = 0;
@@ -21,17 +21,20 @@ class Tank {
   // METHODS
 
   // draw the Tank at its current position
-  void display() {
+  void display(color a) {
+    //using push/pop matrix because the transformation is affecting other objects
+    pushMatrix();
     rectMode(CENTER);
+    fill(a);
     translate(pos.x, pos.y);
     rotate(heading.heading());
     rect(0, 0, 50, 50, 10);
     noStroke();
-    rect(10, 0, 70, 10);
+    rect(13, 0, 70, 15);
+    popMatrix();
   }
 
-  // update the position and state of the Tank
-  // based on inputs
+  // update the position and state of the Tank based on inputs
   void update() {
     // handle turning
     if (keyPressed && key == 'a') {
