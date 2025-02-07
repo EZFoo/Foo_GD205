@@ -45,7 +45,7 @@ void draw() {
   for (int i = 4; i < border.length; i++) {
     border[i].display();
   }
-  //Using a reverse for loop(it starts at the last Bullet in the list)
+  //Using a reverse for loop(it starts at the last Bullet in the list). This was said to help not skip changes to objects or something like that
   for (int i = playerOneBullet.size() - 1; i >= 0; i--) {
     //Note to self cause I forgot ArrayList_name.size() is the amount of objects in the array
 

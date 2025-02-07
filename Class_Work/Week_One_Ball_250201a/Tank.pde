@@ -10,13 +10,7 @@ class Tank {
     pos = new PVector(random(50, width - 50), random(50, height - 50));
     speed = 0;
     heading = PVector.random2D();
-    tankGun = new PVector(18, 0);
-  }
-
-  Tank(float x, float y) {
-    pos = new PVector(x, y);
-    speed = 0;
-    heading = PVector.random2D();
+    tankGun = new PVector(pos.x + 10, pos.y + 10);
   }
 
   // METHODS
@@ -31,7 +25,7 @@ class Tank {
     rotate(heading.heading());
     rect(0, 0, 40, 40, 10);
     noStroke();
-    rect(tankGun.x, tankGun.y, 40, 15);
+    rect(18, 0, 40, 15);
     popMatrix();
   }
 
