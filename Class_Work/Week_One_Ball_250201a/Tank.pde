@@ -1,7 +1,7 @@
 //https://github.com/mrfb/gd105-fall24/blob/main/Lecture%20Code/lecture_241113a_car/car.pde
 class Tank {
   // PROPERTIES
-  PVector pos, heading;
+  PVector pos, heading, tankGun;
   float speed;
 
   // CONTRUCTORS
@@ -10,6 +10,7 @@ class Tank {
     pos = new PVector(random(50, width - 50), random(50, height - 50));
     speed = 0;
     heading = PVector.random2D();
+    tankGun = new PVector(18, 0);
   }
 
   Tank(float x, float y) {
@@ -28,9 +29,9 @@ class Tank {
     fill(a);
     translate(pos.x, pos.y);
     rotate(heading.heading());
-    rect(0, 0, 50, 50, 10);
+    rect(0, 0, 40, 40, 10);
     noStroke();
-    rect(13, 0, 70, 15);
+    rect(tankGun.x, tankGun.y, 40, 15);
     popMatrix();
   }
 
@@ -45,7 +46,7 @@ class Tank {
       turn(0);
     }
 
-    if (keyPressed && key == 'w') {
+    if (keyPressed && key == 'w' && pos.x > 30) {
       speed = 2;
     } else if (keyPressed && key == 's') {
       speed = -2;

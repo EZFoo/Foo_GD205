@@ -58,10 +58,19 @@ void draw() {
       if (border[f].bulletHitWall(POne)) {
         hitWall = true;
       }
-    }
-    if (hitWall) {
-      POne.velocity.mult(-1);
-      hitWall = false;
+
+      //using a version of bounding box collision detection, this time I'm asking if a bullet is at the right, left, top or bottom of a wall
+      //note for future self, you're asking if the boolean in bullet(POne) called bulletHitWall is true
+      if (border[f].bulletHitWall(POne)) {
+        if (POne.startPos.x > border[f].wallPos.x - border[f].rectScaleX / 2 && //This checks if the bullet’s X-position is to the right of the left edge of the wall.
+          POne.startPos.x < border[f].wallPos.x + border[f].rectScaleX / 2) {//This checks if the bullet’s X-position is to the left of the right edge of the wall.
+          POne.velocity.y *= -1;
+        }
+        if (POne.startPos.y > border[f].wallPos.y - border[f].rectScaleY / 2 &&
+          POne.startPos.y < border[f].wallPos.y + border[f].rectScaleY / 2) {
+          POne.velocity.x *= -1; // Horizontal collision
+        }
+      }
     }
   }
   //display player one
