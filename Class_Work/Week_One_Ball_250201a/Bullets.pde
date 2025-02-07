@@ -16,7 +16,7 @@ class Bullet {
     //using push/pop matrix because the transformation is affecting other objects
     pushMatrix();
     noStroke();
-    fill(255, 0, 0);
+    fill(#ff008d);
     ellipse(startPos.x, startPos.y, size, size);
     popMatrix();
   }

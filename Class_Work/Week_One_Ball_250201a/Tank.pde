@@ -46,7 +46,7 @@ class Tank {
       turn(0);
     }
 
-    if (keyPressed && key == 'w' && pos.x > 30) {
+    if (keyPressed && key == 'w') {
       speed = 2;
     } else if (keyPressed && key == 's') {
       speed = -2;

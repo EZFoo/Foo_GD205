@@ -13,7 +13,7 @@ class Wall {
 
   void display() {
     pushMatrix();
-    fill(255);
+    fill(#6300ff);
     rectMode(CENTER);
     rect(wallPos.x, wallPos.y, rectScaleX, rectScaleY);
     popMatrix();
