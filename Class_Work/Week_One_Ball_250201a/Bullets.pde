@@ -22,7 +22,8 @@ class Bullet {
   }
 
   void update() {
-  //The speed of the bullet
-   startPos.add(velocity);
+    //The speed of the bullet
+
+    startPos.add(velocity);
   }
 }

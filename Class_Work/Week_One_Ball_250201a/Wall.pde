@@ -14,20 +14,23 @@ class Wall {
   void display() {
     pushMatrix();
     fill(255);
+    rectMode(CENTER);
     rect(wallPos.x, wallPos.y, rectScaleX, rectScaleY);
     popMatrix();
   }
 
-  void update(Bullet POne) {
+  boolean bulletHitWall (Bullet bulletName) {
     //https://youtu.be/8b_reDI7iPM?si=jd2vYaAu9C6rFtIy
-    //This random youtuber explain bounding box collision detection which is what I used. Nice :)
-    if ((wallPos.x + rectScaleX) >= (POne.startPos.x - POne.size/2) &&
-      wallPos.x <= (POne.startPos.x + POne.size/2) && 
-      (wallPos.y + rectScaleY) >= (POne.startPos.y - POne.size/2) &&
-      wallPos.y <= (POne.startPos.y + POne.size/2)) {
-
-
-      println("yerrr");
+    //This random youtuber explain bounding box collision detection which i took insperation. They calculated
+    //from the top left but that not working so i changed to the center with rectMode center
+    //Note for future, to use the center you x and y values subtract and add them and divide
+    //by 2 to get the left and right edge respectively
+    if ((wallPos.x - rectScaleX / 2 <= bulletName.startPos.x + bulletName.size / 2) &&
+      (wallPos.x + rectScaleX / 2 >= bulletName.startPos.x - bulletName.size / 2) &&
+      (wallPos.y - rectScaleY / 2 <= bulletName.startPos.y + bulletName.size / 2) &&
+      (wallPos.y + rectScaleY / 2 >= bulletName.startPos.y - bulletName.size / 2)) {
+      return true;
     }
+    return false;
   }
 }

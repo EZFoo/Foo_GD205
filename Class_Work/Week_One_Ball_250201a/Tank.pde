@@ -7,7 +7,7 @@ class Tank {
   // CONTRUCTORS
  //Overload
   Tank() {
-    pos = new PVector(random(width), random(width));
+    pos = new PVector(random(50, width - 50), random(50, height - 50));
     speed = 0;
     heading = PVector.random2D();
   }
