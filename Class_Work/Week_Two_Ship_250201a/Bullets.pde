@@ -7,7 +7,7 @@ class Bullet {
   Bullet(float x, float y, int s, float vx, float vy) {
     startPos = new PVector(x, y);
     size = s;
-    velocity = new PVector(vx * 2, vy * 2);
+    velocity = new PVector(vx * 5, vy * 5);
   }
 
   // METHODS

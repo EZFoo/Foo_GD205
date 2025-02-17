@@ -2,10 +2,10 @@
 class Tank {
   // PROPERTIES
   PVector pos, heading, tankGun;
-  float speed;
+  float speed, hitBoxWidth = 30, hitBoxHeight = 40;
 
   // CONTRUCTORS
- //Overload
+  //Overload
   Tank() {
     pos = new PVector(random(50, width - 50), random(50, height - 50));
     speed = 0;
@@ -23,9 +23,13 @@ class Tank {
     fill(a);
     translate(pos.x, pos.y);
     rotate(heading.heading());
-    rect(0, 0, 40, 40, 10);
+    triangle(30, 15, -14, 16, -30, 50);
+    triangle(30, -15, -14, -16, -30, -50);
+    rect(0, 0, 30, 40);
+    noFill();
+    stroke(10);
+    rect(0, 0, hitBoxWidth, hitBoxHeight);
     noStroke();
-    rect(18, 0, 40, 15);
     popMatrix();
   }
 
@@ -33,17 +37,17 @@ class Tank {
   void update() {
     // handle turning
     if (keyPressed && key == 'a') {
-      turn(- TAU / 360.0);
+      turn(- TAU * 2 / 360.0);
     } else if (keyPressed && key == 'd') {
-      turn(+ TAU / 360.0);
+      turn(+ TAU * 2/ 360.0);
     } else {
       turn(0);
     }
 
     if (keyPressed && key == 'w') {
-      speed = +1;
+      speed = min(speed+1.0, 5.0);
     } else if (keyPressed && key == 's') {
-      speed = -1;
+      speed = max(speed- 0.5, -5);
     }
 
     pos.add(PVector.mult(heading, speed));
@@ -51,5 +55,27 @@ class Tank {
 
   void turn(float turnAmount) {
     heading.rotate(turnAmount);
+  }
+
+  //checks if tank is hitting a wall
+  boolean tankHitWall (Wall wallName) {
+    if ((pos.x - hitBoxWidth / 2 <= wallName.wallPos.x + wallName.rectScaleX / 2) &&
+      (pos.x + hitBoxWidth / 2 >= wallName.wallPos.x - wallName.rectScaleX / 2) &&
+      (pos.y - hitBoxHeight / 2 <= wallName.wallPos.y + wallName.rectScaleY / 2) &&
+      (pos.y + hitBoxHeight / 2 >= wallName.wallPos.y - wallName.rectScaleY / 2)) {
+      return true;
+    }
+    return false;
+  }
+
+  void tankStopHitWall (boolean tankHitWall, Wall wallName) {
+    if (pos.x > wallName.wallPos.x - wallName.rectScaleX / 2 && //This checks if the bullet is to the left wall
+      pos.x < wallName.wallPos.x + wallName.rectScaleX / 2) {//This checks if the bullet ia to the right of the wall
+      speed *= -1;
+    }
+    if (pos.y > wallName.wallPos.y - wallName.rectScaleY / 2 &&
+      pos.y < wallName.wallPos.y + wallName.rectScaleY / 2) {
+      speed *= -1;
+    }
   }
 }
