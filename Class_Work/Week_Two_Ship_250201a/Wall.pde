@@ -34,6 +34,18 @@ class Wall {
     return false;
   }
 
+  //checks if a tank is hitting a wall
+  boolean tankHitWall (Tank tankName) {
+    if ((wallPos.x - rectScaleX / 2 <= tankName.pos.x + tankName.hitBoxWidth / 2) &&
+      (wallPos.x + rectScaleX / 2 >= tankName.pos.x - tankName.hitBoxWidth / 2) &&
+      (wallPos.y - rectScaleY / 2 <= tankName.pos.y + tankName.hitBoxHeight / 2) &&
+      (wallPos.y + rectScaleY / 2 >= tankName.pos.y - tankName.hitBoxHeight / 2)) {
+      return true;
+    }
+    return false;
+  }
+
+  //reverse the velocity os the bullet depending on where it hit
   void bulletBounceOffWall (boolean bulletHitWall, Bullet bulletName) {
     if (bulletHitWall) {
       if (bulletName.startPos.x > wallPos.x - rectScaleX / 2 && //This checks if the bullet is to the left wall
@@ -44,6 +56,20 @@ class Wall {
       if (bulletName.startPos.y > wallPos.y - rectScaleY / 2 &&
         bulletName.startPos.y < wallPos.y + rectScaleY / 2) {
         bulletName.velocity.x *= -1;
+      }
+    }
+  }
+  
+  void tankBounceOffWall (boolean tankHitWall, Tank tankName) {
+    if (tankHitWall) {
+      if (tankName.pos.x > wallPos.x - rectScaleX / 2 && //This checks if the bullet is to the left wall
+        tankName.pos.x < wallPos.x + rectScaleX / 2) {//This checks if the bullet ia to the right of the wall
+        tankName.speed *= -1;
+      }
+
+      if (tankName.pos.y > wallPos.y - rectScaleY / 2 &&
+        tankName.pos.y < wallPos.y + rectScaleY / 2) {
+        tankName.speed *= -1;
       }
     }
   }

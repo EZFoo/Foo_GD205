@@ -34,19 +34,19 @@ class Tank {
   }
 
   // update the position and state of the Tank based on inputs
-  void update() {
+  void update(char turnLeft, char turnRight, char moveFoward,char moveBackward) {
     // handle turning
-    if (keyPressed && key == 'a') {
+    if (keyPressed && key == turnLeft) {
       turn(- TAU * 2 / 360.0);
-    } else if (keyPressed && key == 'd') {
+    } else if (keyPressed && key == turnRight) {
       turn(+ TAU * 2/ 360.0);
     } else {
       turn(0);
     }
 
-    if (keyPressed && key == 'w') {
+    if (keyPressed && key == moveFoward) {
       speed = min(speed+1.0, 5.0);
-    } else if (keyPressed && key == 's') {
+    } else if (keyPressed && key == moveBackward) {
       speed = max(speed- 0.5, -5);
     }
 
@@ -55,30 +55,5 @@ class Tank {
 
   void turn(float turnAmount) {
     heading.rotate(turnAmount);
-  }
-
-  //checks if tank is hitting a wall
-  boolean tankHitWall (Wall wallName) {
-    if ((pos.x - hitBoxWidth / 2 <= wallName.wallPos.x + wallName.rectScaleX / 2) &&
-      (pos.x + hitBoxWidth / 2 >= wallName.wallPos.x - wallName.rectScaleX / 2) &&
-      (pos.y - hitBoxHeight / 2 <= wallName.wallPos.y + wallName.rectScaleY / 2) &&
-      (pos.y + hitBoxHeight / 2 >= wallName.wallPos.y - wallName.rectScaleY / 2)) {
-      return true;
-    }
-    return false;
-  }
-
-  void tankStopHitWall (boolean tankHitWall, Wall wallName) {
-    if (tankHitWall) {
-      
-      if (pos.x > wallName.wallPos.x - wallName.rectScaleX / 2 && //This checks if the player is to the left wall
-        pos.x < wallName.wallPos.x + wallName.rectScaleX / 2) {//This checks if the player ia to the right of the wall
-        speed *= -1;
-      }
-      if (pos.y > wallName.wallPos.y - wallName.rectScaleY / 2 &&
-        pos.y < wallName.wallPos.y + wallName.rectScaleY / 2) {
-        speed *= -1;
-      }
-    }
   }
 }
