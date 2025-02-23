@@ -34,7 +34,7 @@ class Tank {
   }
 
   // update the position and state of the Tank based on inputs
-  void update(char turnLeft, char turnRight, char moveFoward,char moveBackward) {
+  void update(char turnLeft, char turnRight, char moveFoward, char moveBackward) {
     // handle turning
     if (keyPressed && key == turnLeft) {
       turn(- TAU * 2 / 360.0);
@@ -45,9 +45,9 @@ class Tank {
     }
 
     if (keyPressed && key == moveFoward) {
-      speed = min(speed+1.0, 5.0);
+      speed = min(speed+1.0, 3.0);
     } else if (keyPressed && key == moveBackward) {
-      speed = max(speed- 0.5, -5);
+      speed = max(speed- 0.5, -3);
     }
 
     pos.add(PVector.mult(heading, speed));
