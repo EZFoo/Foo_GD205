@@ -34,5 +34,17 @@ class Wall {
     return false;
   }
 
-  
+  void bulletBounceOffWall (boolean bulletHitWall, Bullet bulletName) {
+    if (bulletHitWall) {
+      if (bulletName.startPos.x > wallPos.x - rectScaleX / 2 && //This checks if the bullet is to the left wall
+        bulletName.startPos.x < wallPos.x + rectScaleX / 2) {//This checks if the bullet ia to the right of the wall
+        bulletName.velocity.y *= -1;
+      }
+
+      if (bulletName.startPos.y > wallPos.y - rectScaleY / 2 &&
+        bulletName.startPos.y < wallPos.y + rectScaleY / 2) {
+        bulletName.velocity.x *= -1;
+      }
+    }
+  }
 }

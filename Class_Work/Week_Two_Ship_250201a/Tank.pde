@@ -69,13 +69,16 @@ class Tank {
   }
 
   void tankStopHitWall (boolean tankHitWall, Wall wallName) {
-    if (pos.x > wallName.wallPos.x - wallName.rectScaleX / 2 && //This checks if the bullet is to the left wall
-      pos.x < wallName.wallPos.x + wallName.rectScaleX / 2) {//This checks if the bullet ia to the right of the wall
-      speed *= -1;
-    }
-    if (pos.y > wallName.wallPos.y - wallName.rectScaleY / 2 &&
-      pos.y < wallName.wallPos.y + wallName.rectScaleY / 2) {
-      speed *= -1;
+    if (tankHitWall) {
+      
+      if (pos.x > wallName.wallPos.x - wallName.rectScaleX / 2 && //This checks if the player is to the left wall
+        pos.x < wallName.wallPos.x + wallName.rectScaleX / 2) {//This checks if the player ia to the right of the wall
+        speed *= -1;
+      }
+      if (pos.y > wallName.wallPos.y - wallName.rectScaleY / 2 &&
+        pos.y < wallName.wallPos.y + wallName.rectScaleY / 2) {
+        speed *= -1;
+      }
     }
   }
 }

@@ -77,9 +77,7 @@ void draw() {
       }
     }
   }
-  for (int i = 0; i <= wall.length; i++) {
-    //if(Tank.tankHitWall(wall));
-  }
+
 
   //display player one
   playerOne.display(#f96363);
