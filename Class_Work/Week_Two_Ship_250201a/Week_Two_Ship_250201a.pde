@@ -1,3 +1,4 @@
+//This code makes a 
 Tank playerOne, playerTwo;
 ArrayList <Bullet> pOneBullets, pTwoBullets;
 Wall[] wall;
@@ -34,7 +35,7 @@ void setup() {
 void draw() {
   background(0);
 
-  //when the player presses Z a Bullet will shoot out depending on the heading of Tank
+  //when a player presses v a Bullet will shoot out depending on the heading of playerOne
   if (keyPressed && key == 'v' && !shootOnce) {
     pOneBullets.add(new Bullet(playerOne.pos.x, playerOne.pos.y, 15, playerOne.heading.x, playerOne.heading.y));
     shootOnce = true;
@@ -42,6 +43,7 @@ void draw() {
     shootOnce = false;
   }
   
+  //when a player presses v a Bullet will shoot out depending on the heading of playerTwo
   if (keyPressed && key == 'm' && !shootOnce) {
     pTwoBullets.add(new Bullet(playerTwo.pos.x, playerTwo.pos.y, 15, playerTwo.heading.x, playerTwo.heading.y));
     shootOnce = true;
@@ -73,7 +75,7 @@ void draw() {
     playerTwoBullets.update();
     playerTwoBullets.display(#00b8ff);
 
-    // Check collision with a bullet and a wall
+    //Check collision with a bullet and a wall
     for (int f = 0; f < wall.length; f++) {
       if (wall[f].bulletHitWall(playerTwoBullets)) {
         wall[f].bulletBounceOffWall(wall[f].bulletHitWall(playerTwoBullets), playerTwoBullets);

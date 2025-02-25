@@ -26,4 +26,15 @@ class Bullet {
     //The speed of the bullet
     startPos.add(velocity);
   }
+
+//collision with a bullet and a tank
+boolean bulletHitTank (Tank tankName) {
+    if ((startPos.x - size / 2 <= tankName.pos.x + tankName.hitBoxWidth / 2) &&
+      (startPos.x + size / 2 >= tankName.pos.x - tankName.hitBoxWidth / 2) &&
+      (startPos.y - size / 2 <= tankName.pos.y + tankName.hitBoxHeight / 2) &&
+      (startPos.y + size / 2 >= tankName.pos.y - tankName.hitBoxHeight / 2)) {
+      return true;
+    }
+    return false;
+  }
 }
