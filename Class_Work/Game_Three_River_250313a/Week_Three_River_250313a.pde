@@ -12,13 +12,14 @@ void setup() {
   theyHit = new Collision();
 
   //Walls
-  wall = new Wall[2];
+  wall = new Wall[5];
 
   //walls at the edge of the screen
   wall[0] = new Wall(width/2, 100, width, 30);
+  wall[4] = new Wall(width/2, 130, 100, 30);
   wall[1] = new Wall(width/2, 300, width, 30);
-  //wall[2] = new Wall(width/2, height - 300, width, 30);
-  //wall[3] = new Wall(width/2, height - 100, width, 30);
+  wall[2] = new Wall(width/2, 500, width, 30);
+  wall[3] = new Wall(width/2, 700, width, 30);
 }
 
 void draw() {
@@ -35,4 +36,6 @@ void draw() {
 
   //Frog methods
   player.display();
+  player.jump();
+  println(10 % frameRate);
 }

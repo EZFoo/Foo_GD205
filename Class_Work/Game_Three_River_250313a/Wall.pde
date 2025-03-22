@@ -16,7 +16,7 @@ class Wall {
     pushMatrix();
     fill(#6300ff);
     rectMode(CENTER);
-    rect(pos.x, pos.y, sizeX, sizeY);
+    rect(pos.x, pos.y + frogJumpAmount, sizeX, sizeY);
     popMatrix();
   }
 
@@ -24,13 +24,16 @@ class Wall {
     if (frogJump) {
       frogJumpAmount += 10;
 
-      pos.y += frogJumpAmount;
-
       // Reset the wall to the top
-      if (pos.y >= height + 20) {
+      if (pos.y + frogJumpAmount >= height + 20) {
         pos.y = -sizeY;
         frogJumpAmount = 0;
       }
+    }
+
+
+    if (sizeX < width) {
+    pos.x = pos.x + (frameRate % 10);
     }
   }
 }

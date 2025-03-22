@@ -24,12 +24,12 @@ class Frog {
     if (keyPressed == true && key == 'w' && !jumpOnce) {
       jumpOnce = true;
       frogJump = true;
-    }
-    if (keyPressed == false && jumpOnce) {
+    } if (!keyPressed == true && jumpOnce) {
       jumpOnce = false;
-    }else
-    frogJump = false;
+      frogJump = false;
+    }
   }
+
 
   void death(boolean playerDied) {
     if (playerDied) {
