@@ -19,12 +19,12 @@ class Frog {
     rect(pos.x, pos.y, sizeX, sizeY);
     popMatrix();
   }
-
+//another bad attempt at a state machine 
   void jump() {
-    if (keyPressed == true && key == 'w' && !jumpOnce) {
+    if (keyPressed && key == 'w' && !jumpOnce) {
       jumpOnce = true;
       frogJump = true;
-    } if (!keyPressed == true && jumpOnce) {
+    } else if (!keyPressed && key == 'w' && jumpOnce) {
       jumpOnce = false;
       frogJump = false;
     }
@@ -32,7 +32,7 @@ class Frog {
 
 
   void death(boolean playerDied) {
-    if (playerDied) {
+    if (playerDied && sizeY > 0 && sizeX > 0) {
       sizeX -= 1;
       sizeY -= 1;
     }
