@@ -1,3 +1,5 @@
+//this code makes a frogger game. You press W to move foward, if you are not on a platform
+//you die and the code breaks 
 Frog player;
 Wall[] wall;
 Collision theyHit;
@@ -8,7 +10,7 @@ void setup() {
   size(720, 800);
 
   //Frog
-  player = new Frog(width/2, 600, 30, 30);
+  player = new Frog(width/2, 600, 16, 16);
 
   //Collision
   theyHit = new Collision();
@@ -21,22 +23,22 @@ void setup() {
     wall[i] = new Wall(width/2, 200 * i, width, 20);
   }
   for (int i = 4; i < 13; i++) {
-    wall[i] = new Wall(width/2 + (random(-300, 300)), 20 * (i - 3), 100, 20);
+    wall[i] = new Wall(width/2, 20 * (i - 3), 100, 20);
   }
   for (int i = 13; i < 22; i++) {
-    wall[i] = new Wall(width/2 + (random(-300, 300)), 20 * (i - 2 ), 100, 20);
+    wall[i] = new Wall(width/2, 20 * (i - 2 ), 100, 20);
   }
   for (int i = 22; i < 31; i++) {
-    wall[i] = new Wall(width/2 + (random(-300, 300)), 20 * (i - 1 ), 100, 20);
+    wall[i] = new Wall(width/2, 20 * (i - 1 ), 100, 20);
   }
   for (int i = 31; i < 43; i++) {
-    wall[i] = new Wall(width/2 + (random(-300, 300)), 20 * (i), 100, 20);
-    wall[43] = new Wall(width/2 + (random(-300, 300)), -20, 100, 20);
+    wall[i] = new Wall(width/2, 20 * (i), 100, 20);
+    wall[43] = new Wall(width/2, -20, 100, 20);
   }
 }
 
 void draw() {
-  background(200);
+  background(#05d9e8);
 
   //resets at the starting of each frame
   playerIsDying = true;
@@ -45,6 +47,7 @@ void draw() {
   for (int i = 0; i < wall.length; i++) {
     wall[i].display();
     wall[i].update(player.frogJump);
+    wall[i].frogDied(player.currentState == State.RESPAWN, player.currentState == State.RESPAWN);
 
     //Collision methods
     //if player is hitting a wall they live

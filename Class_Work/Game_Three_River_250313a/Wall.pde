@@ -1,13 +1,15 @@
 class Wall {
   //PROPERTIES
-  PVector pos, movementSpeed;
+  PVector pos, startPos, movementSpeed;
   float sizeX, sizeY;
-  float frogJumpAmount = 10;
+  float frogJumpAmount = 20;
+  boolean doOnce = true;
 
   //CONTRUCTORS
   Wall(float x, float y, float scaleX, float scaleY) {
     pos = new PVector(x, y);
-    movementSpeed = new PVector(10,0);
+    startPos = new PVector(x, y);
+    movementSpeed = new PVector(2, 0);
     sizeX = scaleX;
     sizeY = scaleY;
   }
@@ -15,7 +17,7 @@ class Wall {
   //METHODS
   void display() {
     pushMatrix();
-    fill(#6300ff);
+    fill(#01012b);
     rectMode(CENTER);
     rect(pos.x, pos.y, sizeX, sizeY);
     popMatrix();
@@ -34,10 +36,24 @@ class Wall {
     //makes the smaller walls move side to side
     if (sizeX != width) {
       pos.add(movementSpeed);
+      
+      //adds a random starting pos
+      if (doOnce) {
+        pos.x = (startPos.x + random(-290, 290));
+        doOnce = false;
+      }
     }
 
-    if (pos.x- sizeX / 2 <= -5 || pos.x+ sizeX/2 >= width + 5) {
+    if (pos.x - sizeX / 2 <= -5 || pos.x+ sizeX/2 >= width + 5) {
       movementSpeed.x *= -1;
+    }
+  }
+
+  void frogDied(boolean frogDied, boolean respawn) {
+    if (frogDied) {
+      pos = startPos;
+    } if (respawn) {
+      doOnce = true;
     }
   }
 }
