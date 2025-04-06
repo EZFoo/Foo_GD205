@@ -20,6 +20,7 @@ class FruitGenerator {
   }
 
   void update() {
-    mouseX
+    pos.x = mouseX;
+    pos.y = mouseY;
   }
 }

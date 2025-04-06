@@ -1,6 +1,6 @@
 class Fish {
   //PROPERTIES
-  PVector pos;
+  PVector pos, heading;
   float sizeX, sizeY;
 
   //CONTRUCTORS
@@ -19,6 +19,18 @@ class Fish {
     popMatrix();
   }
 
-  void update() {
+  void update(FruitGenerator one) {
+
+    if (pos.x < one.pos.x) {
+      pos.x += 10;
+    } else if (pos.x > one.pos.x) {
+      pos.x -= 10;
+    }
+
+    if (pos.y < one.pos.y) {
+      pos.y += 10;
+    } else if (pos.y > one.pos.y) {
+      pos.y -= 10;
+    }
   }
 }
