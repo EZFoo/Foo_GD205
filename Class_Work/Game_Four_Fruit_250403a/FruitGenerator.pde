@@ -1,3 +1,7 @@
+//enum State {
+//  SPAWN, STOP
+//}
+
 class FruitGenerator {
   //PROPERTIES
   PVector pos;
@@ -20,7 +24,8 @@ class FruitGenerator {
   }
 
   void update() {
-    pos.x = mouseX;
-    pos.y = mouseY;
+    //makes it go down
+    pos.y += 1;
+   
   }
 }

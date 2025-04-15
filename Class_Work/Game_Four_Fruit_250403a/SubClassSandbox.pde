@@ -1,3 +1,4 @@
+//I'll use this class for behaviors that will be used a lot
 class SubClassSandbox {
 
   boolean collisionWithFishAndFruitGenerator(Fish bodyOne, FruitGenerator bodyTwo) {
