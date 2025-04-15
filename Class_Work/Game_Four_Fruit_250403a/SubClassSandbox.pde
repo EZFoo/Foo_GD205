@@ -10,4 +10,14 @@ class SubClassSandbox {
     }
     return false;
   }
+  
+  boolean collisionWithButtonAndMouse(Fish bodyOne) {
+    if ((bodyOne.pos.x - bodyOne.sizeX / 2 <= mouseX) &&
+      (bodyOne.pos.x + bodyOne.sizeX / 2 >= mouseX) &&
+      (bodyOne.pos.y - bodyOne.sizeY / 2 <= mouseY) &&
+      (bodyOne.pos.y + bodyOne.sizeY / 2 >= mouseY)) {
+      return true;
+    }
+    return false;
+  }
 }

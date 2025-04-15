@@ -15,8 +15,10 @@ class Buttons {
     pushMatrix();
     rectMode(CENTER);
     rect(pos.x, pos.y, sizeX, sizeY, 50);
+    popMatrix();
   }
 
   void update() {
+    
   }
 }
