@@ -19,6 +19,14 @@ void setup() {
 void draw() {
   background(0);
 
+  if (mousePressed && !pressed) {
+    fruit.add(new FruitGenerator(mouseX, mouseY, 50, 50));
+    pressed = true;
+  }
+  if (!mousePressed && pressed) {
+    pressed = false;
+  }
+
   //Updates and display the fruit. If a fish hits a fruit remove it.
   for (int i = fruit.size() - 1; i >= 0; i--) {
     FruitGenerator fruitOne = fruit.get(i);
