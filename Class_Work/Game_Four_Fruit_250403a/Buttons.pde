@@ -13,12 +13,13 @@ class Buttons {
   //CONTRUCTORS
   void display() {
     pushMatrix();
+    fill(150);
     rectMode(CENTER);
     rect(pos.x, pos.y, sizeX, sizeY, 50);
     popMatrix();
   }
 
-  void update() {
-    
+  void update(boolean ui) {
+    println(ui);
   }
 }

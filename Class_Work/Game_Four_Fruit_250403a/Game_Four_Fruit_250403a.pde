@@ -4,6 +4,7 @@ Buttons[] button;
 SubClassSandbox iNeed;
 
 boolean pressed = false;
+boolean playerPressedButton = false;
 
 void setup() {
   size(720, 720);
@@ -61,9 +62,11 @@ void draw() {
     fish.update(fruitOne);
   }
 
+  for (int i = 0; i < button.length; i++) {
 
+    button[0].display();
+    button[0].update(iNeed.collisionWithButtonAndMouse(button[i]));
+  }
 
   fish.display();
-  button[0].display();
-  button[0].update();
 }

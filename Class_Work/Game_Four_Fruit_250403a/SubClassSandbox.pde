@@ -11,7 +11,7 @@ class SubClassSandbox {
     return false;
   }
   
-  boolean collisionWithButtonAndMouse(Fish bodyOne) {
+  boolean collisionWithButtonAndMouse(Buttons bodyOne) {
     if ((bodyOne.pos.x - bodyOne.sizeX / 2 <= mouseX) &&
       (bodyOne.pos.x + bodyOne.sizeX / 2 >= mouseX) &&
       (bodyOne.pos.y - bodyOne.sizeY / 2 <= mouseY) &&
