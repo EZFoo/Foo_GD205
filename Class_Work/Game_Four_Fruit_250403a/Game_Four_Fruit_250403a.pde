@@ -1,5 +1,5 @@
 ArrayList <FruitGenerator> fruit;
-Fish fish;
+ArrayList <Fish> fish;
 Buttons[] button;
 SubClassSandbox iNeed;
 
@@ -9,8 +9,8 @@ boolean playerPressedButton = false;
 void setup() {
   size(720, 720);
   iNeed = new SubClassSandbox();
-  fruit = new ArrayList<FruitGenerator>();
-  fish = new Fish(width/2, height/2, 50, 50);
+  fruit = new ArrayList <FruitGenerator>();
+  fish = new ArrayList <Fish>();
   button = new Buttons[1];
 
   //buttons location and size
@@ -20,13 +20,17 @@ void setup() {
 void draw() {
   background(0);
 
-  if (mousePressed && !pressed) {
+  //when player presses mouse make fruit
+  if (mousePressed && !pressed && !playerPressedButton) {
     fruit.add(new FruitGenerator(mouseX, mouseY, 50, 50));
     pressed = true;
   }
   if (!mousePressed && pressed) {
     pressed = false;
   }
+  
+  //when player presses button[0] make fish
+  if(button[0].iGotTouched)
 
   //Updates and display the fruit. If a fish hits a fruit remove it.
   for (int i = fruit.size() - 1; i >= 0; i--) {
@@ -34,38 +38,48 @@ void draw() {
     fruitOne.display();
     fruitOne.update();
 
-    if (iNeed.collisionWithFishAndFruitGenerator(fish, fruitOne) || fruitOne.pos.y > height + 100) {
-      fruit.remove(i);
-      fish.currentState = State.IDLE;
+    for (int f = fish.size() - 1; i >=0; i--) {
+      Fish fishOne = fish.get(i);
+      if (iNeed.collisionWithFishAndFruitGenerator(fishOne, fruitOne) || fruitOne.pos.y > height + 100) {
+        fruit.remove(i);
+        fishOne.currentState = State.IDLE;
+      }
     }
   }
 
   //.isEmpty() is a method for ArrayList that returns true if the list has nothing, and false if it has at least one.
   if (!fruit.isEmpty()) {
     //if a fruit exist a fish will try to eat it
-    fish.currentState = State.FEEDING;
+    for (int i = fish.size() - 1; i >=0; i--) {
+      Fish fishOne = fish.get(i);
+      fishOne.currentState = State.FEEDING;
 
-    //geting the distance to the closest fruit
-    FruitGenerator fruitOne = fruit.get(0);
-    float minDist = dist(fish.pos.x, fish.pos.y, fruitOne.pos.x, fruitOne.pos.y);
+      //geting the distance to the closest fruit
+      FruitGenerator fruitOne = fruit.get(0);
+      float minDist = dist(fishOne.pos.x, fishOne.pos.y, fruitOne.pos.x, fruitOne.pos.y);
 
-    //this is a for-each loop, it gooes through each element in a list and gives access to them
-    for (FruitGenerator i : fruit) {
-      //the fish will go to the closest fruit
-      float dist = dist(fish.pos.x, fish.pos.y, i.pos.x, i.pos.y);
-      if (dist < minDist) {
-        minDist = dist;
-        fruitOne = i;
+      //this is a for-each loop, it gooes through each element in a list and gives access to them
+      for (FruitGenerator f : fruit) {
+        //the fish will go to the closest fruit
+        float dist = dist(fishOne.pos.x, fishOne.pos.y, f.pos.x, f.pos.y);
+        if (dist < minDist) {
+          minDist = dist;
+          fruitOne = f;
+        }
       }
-    }
 
-    fish.update(fruitOne);
+      fishOne.update(fruitOne);
+    }
   }
 
   for (int i = 0; i < button.length; i++) {
 
-    button[0].display();
-    button[0].update(iNeed.collisionWithButtonAndMouse(button[i]));
+    button[i].display();
+    button[i].update(iNeed.collisionWithButtonAndMouse(button[i]));
+
+    if (iNeed.collisionWithButtonAndMouse(button[i])) {
+      playerPressedButton = true;
+    }
   }
 
   fish.display();

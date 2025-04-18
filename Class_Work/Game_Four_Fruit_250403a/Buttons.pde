@@ -3,6 +3,8 @@ class Buttons {
   //PROPERTIES
   PVector pos, heading;
   float sizeX, sizeY;
+  
+  boolean iGotTouched = false;
 
   //CONTRUCTORS
   Buttons(float x, float y, float scaleX, float scaleY) {
@@ -19,7 +21,9 @@ class Buttons {
     popMatrix();
   }
 
-  void update(boolean ui) {
-    println(ui);
+  void update(boolean touchMe) {
+    if(touchMe){
+    iGotTouched = true;
+    }
   }
 }
