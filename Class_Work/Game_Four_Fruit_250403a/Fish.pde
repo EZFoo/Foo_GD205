@@ -19,11 +19,8 @@ class Fish {
 
   //CONTRUCTORS
   void display() {
-    pushMatrix();
-    rectMode(CENTER);
     fill(100);
     rect(pos.x, pos.y, sizeX, sizeY);
-    popMatrix();
   }
 
   void update(FruitGenerator one) {

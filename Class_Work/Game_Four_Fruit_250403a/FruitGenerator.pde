@@ -16,11 +16,8 @@ class FruitGenerator {
 
   //METHODS
   void display() {
-    pushMatrix();
-    fill(255);
+    fill(200);
     rect(pos.x, pos.y, sizeX, sizeY);
-    rectMode(CENTER);
-    popMatrix();
   }
 
   void update() {
