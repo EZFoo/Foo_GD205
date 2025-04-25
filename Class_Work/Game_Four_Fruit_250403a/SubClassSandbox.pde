@@ -1,6 +1,11 @@
 //I'll use this class for behaviors that will be used a lot
+enum State {
+  IDLE, FEEDING
+}
+
 class SubClassSandbox {
   boolean pressed = false;
+  State currentState = State.IDLE;
 
   boolean collisionWithFishAndFruitGenerator(Fish bodyOne, FruitGenerator bodyTwo) {
     if ((bodyTwo.pos.x - bodyTwo.sizeX / 2 <= bodyOne.pos.x + bodyOne.sizeX / 2) &&
@@ -22,7 +27,7 @@ class SubClassSandbox {
     return false;
   }
 
-  boolean OnlyTriggerMousePressedOnce() {
+  boolean onlyTriggerMousePressedOnce() {
     if (mousePressed && !pressed) {
       pressed = true;
       return true;
@@ -31,5 +36,29 @@ class SubClassSandbox {
       pressed = false;
     }
     return false;
+  }
+  
+  void fishStates(FruitGenerator one, Fish two){
+  switch(currentState) {
+    case FEEDING:
+      if (two.pos.x < one.pos.x && one.pos.y < height - one.sizeY) {
+        two.pos.x += random(3);
+      } else if (two.pos.x > one.pos.x && one.pos.y < height - one.sizeY) {
+        two.pos.x -= random(3);
+      }
+
+      if (two.pos.y < one.pos.y && one.pos.y < height - one.sizeY) {
+        two.pos.y += random(3);
+      } else if (two.pos.y > one.pos.y && one.pos.y < height - one.sizeY) {
+        two.pos.y -= random(3);
+        break;
+      }
+
+    case IDLE:
+      two.pos.x += random(-1, 1);
+      two.pos.y += random(-1, 1);
+      
+      break;
+    }
   }
 }
