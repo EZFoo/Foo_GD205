@@ -28,21 +28,20 @@ void draw() {
     fruit.add(new FruitGenerator(mouseX, mouseY, 50, 50));
   }
 
-
   //when player presses button[0] make fish
   if (button[0].iGotTouched && iNeed.onlyTriggerMousePressedOnce()) {
     fish.add(new Fish(random(width), random(height), 40, 40));
     button[0].iGotTouched = false;
   }
 
-  //.isEmpty() is a method for ArrayList that returns true if the list has nothing, and false if it has at least one.
-  if (!fruit.isEmpty()) {
+  //the fish will always update, whether a fruit exists or not
+  for (int i = fish.size() - 1; i >= 0; i--) {
+    Fish fishOne = fish.get(i);
 
-    //if a fruit exist a fish will try to eat it
-    for (int i = fish.size() - 1; i >= 0; i--) {
-      Fish fishOne = fish.get(i);
+    if (!fruit.isEmpty()) {
+      //if a fruit exist a fish will try to eat it
 
-      //geting the distance to the closest fruit
+      //getting the distance to the closest fruit
       FruitGenerator fruitOne = fruit.get(0);
       float minDist = dist(fishOne.pos.x, fishOne.pos.y, fruitOne.pos.x, fruitOne.pos.y);
 
@@ -55,29 +54,33 @@ void draw() {
           fruitOne = f;
         }
       }
-      //calling method from SubClassSandbox
-      iNeed.fishStates(fruitOne, fishOne);
-      iNeed.currentState = State.FEEDING;
 
-      //If a fish hits a fruit or fruit goes off screen remove it.
-      if (!fruit.isEmpty() && iNeed.collisionWithFishAndFruitGenerator(fishOne, fruitOne) || fruitOne.pos.y > height + 100) {
-        fruitsToRemove.add(fruitOne);
+      fishOne.currentState = State.FEEDING;
+      iNeed.fishStates(fruitOne, fishOne);
+
+      if (iNeed.collisionWithFishAndFruitGenerator(fishOne, fruitOne) || fruitOne.pos.y > height + 100) {
+        if (!fruitsToRemove.contains(fruitOne)) {
+          fruitsToRemove.add(fruitOne);
+        }
       }
+
+    } else {
+      //if no fruit exist, fish will go idle
+      fishOne.currentState = State.IDLE;
+      iNeed.fishStates(null, fishOne);
     }
   }
-  fruit.removeAll(fruitsToRemove);
-  if (fruit.isEmpty()) {
-    iNeed.currentState = State.IDLE;
-  }
 
-  //Updates and display the fruit.
+  fruit.removeAll(fruitsToRemove);
+
+  //Updates and display the fruit
   for (FruitGenerator i : fruit) {
     FruitGenerator fruitOne = i;
     fruitOne.display();
     fruitOne.update();
   }
 
-  //Updates and display the fish.
+  //Updates and display the fish
   for (Fish i : fish) {
     Fish fishOne = i;
     fishOne.display();

@@ -3,6 +3,7 @@ class Fish {
   //PROPERTIES
   PVector pos, heading;
   float sizeX, sizeY;
+  State currentState = State.IDLE;
 
   //CONTRUCTORS
   Fish(float x, float y, float scaleX, float scaleY) {

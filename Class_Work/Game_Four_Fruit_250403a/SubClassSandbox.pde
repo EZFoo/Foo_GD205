@@ -37,27 +37,28 @@ class SubClassSandbox {
     }
     return false;
   }
-  
-  void fishStates(FruitGenerator one, Fish two){
-  switch(currentState) {
-    case FEEDING:
-      if (two.pos.x < one.pos.x && one.pos.y < height - one.sizeY) {
-        two.pos.x += random(3);
-      } else if (two.pos.x > one.pos.x && one.pos.y < height - one.sizeY) {
-        two.pos.x -= random(3);
-      }
 
-      if (two.pos.y < one.pos.y && one.pos.y < height - one.sizeY) {
-        two.pos.y += random(3);
-      } else if (two.pos.y > one.pos.y && one.pos.y < height - one.sizeY) {
-        two.pos.y -= random(3);
-        break;
+  void fishStates(FruitGenerator one, Fish two) {
+    switch(two.currentState) {
+    case FEEDING:
+      if (one != null) {
+        if (two.pos.x < one.pos.x && one.pos.y < height - one.sizeY) {
+          two.pos.x += random(3);
+        } else if (two.pos.x > one.pos.x && one.pos.y < height - one.sizeY) {
+          two.pos.x -= random(3);
+        }
+
+        if (two.pos.y < one.pos.y && one.pos.y < height - one.sizeY) {
+          two.pos.y += random(3);
+        } else if (two.pos.y > one.pos.y && one.pos.y < height - one.sizeY) {
+          two.pos.y -= random(3);
+        }
       }
+      break;
 
     case IDLE:
-      two.pos.x += random(-1, 1);
-      two.pos.y += random(-1, 1);
-      
+      two.pos.x += random(-0.5, 0.5);
+      two.pos.y += random(-0.5, 0.5);
       break;
     }
   }

@@ -1,7 +1,3 @@
-//enum State {
-//  SPAWN, STOP
-//}
-
 class FruitGenerator {
   //PROPERTIES
   PVector pos;
