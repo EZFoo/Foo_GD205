@@ -1,4 +1,5 @@
 ArrayList <FruitGenerator> fruit;
+ArrayList <FruitGenerator> fruitsToRemove;
 ArrayList <Fish> fish;
 Buttons[] button;
 SubClassSandbox iNeed;
@@ -11,6 +12,7 @@ void setup() {
 
   iNeed = new SubClassSandbox();
   fruit = new ArrayList <FruitGenerator>();
+  fruitsToRemove = new ArrayList <FruitGenerator>();
   fish = new ArrayList <Fish>();
   button = new Buttons[1];
 
@@ -41,7 +43,7 @@ void draw() {
       Fish fishOne = fish.get(i);
 
       //geting the distance to the closest fruit
-      FruitGenerator fruitOne = fruit.get(i);
+      FruitGenerator fruitOne = fruit.get(0);
       float minDist = dist(fishOne.pos.x, fishOne.pos.y, fruitOne.pos.x, fruitOne.pos.y);
 
       //this is a for-each loop, it goes through each element in a list and gives access to them
@@ -59,11 +61,11 @@ void draw() {
 
       //If a fish hits a fruit or fruit goes off screen remove it.
       if (!fruit.isEmpty() && iNeed.collisionWithFishAndFruitGenerator(fishOne, fruitOne) || fruitOne.pos.y > height + 100) {
-        fruit.remove(i);
+        fruitsToRemove.add(fruitOne);
       }
     }
   }
-  
+  fruit.removeAll(fruitsToRemove);
   if (fruit.isEmpty()) {
     iNeed.currentState = State.IDLE;
   }
