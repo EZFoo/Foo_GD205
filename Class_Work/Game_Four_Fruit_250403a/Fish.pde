@@ -3,6 +3,7 @@ class Fish {
   //PROPERTIES
   PVector pos, heading;
   float sizeX, sizeY;
+  float turnAmount;
   State currentState = State.IDLE;
 
   //CONTRUCTORS
@@ -10,15 +11,22 @@ class Fish {
     pos = new PVector(x, y);
     sizeX = scaleX;
     sizeY = scaleY;
+    heading = PVector.random2D();
   }
 
   //CONTRUCTORS
   void display() {
+    pushMatrix();
+    translate(pos.x, pos.y); //making this the origin point
+    rotate(heading.heading());
+    
     fill(100);
-    rect(pos.x, pos.y, sizeX, sizeY);
+    rect(0, 0, sizeX, sizeY);
+    triangle(0, - 20, - 20, 20, 20, 20);
+    popMatrix();
   }
 
   void update() {
-    
+    heading.rotate(turnAmount);
   }
 }

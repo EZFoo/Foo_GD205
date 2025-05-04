@@ -30,7 +30,7 @@ void draw() {
 
   //when player presses button[0] make fish
   if (button[0].iGotTouched && iNeed.onlyTriggerMousePressedOnce()) {
-    fish.add(new Fish(random(width), random(height), 40, 40));
+    fish.add(new Fish(random(width), random(height), 25, 25));
     button[0].iGotTouched = false;
   }
 
@@ -84,6 +84,7 @@ void draw() {
   for (Fish i : fish) {
     Fish fishOne = i;
     fishOne.display();
+    fishOne.update();
   }
 
   //display and updates buttons

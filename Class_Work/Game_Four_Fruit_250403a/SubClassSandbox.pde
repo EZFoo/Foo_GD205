@@ -42,24 +42,22 @@ class SubClassSandbox {
     switch(two.currentState) {
     case FEEDING:
       if (one != null) {
-        if (two.pos.x < one.pos.x && one.pos.y < height - one.sizeY) {
-          two.pos.x += random(3);
-        } else if (two.pos.x > one.pos.x && one.pos.y < height - one.sizeY) {
-          two.pos.x -= random(3);
-        }
+          PVector target = PVector.sub(one.pos, two.pos); // direction to fruit
+          target.normalize();
 
-        if (two.pos.y < one.pos.y && one.pos.y < height - one.sizeY) {
-          two.pos.y += random(3);
-        } else if (two.pos.y > one.pos.y && one.pos.y < height - one.sizeY) {
-          two.pos.y -= random(3);
-        }
+          //turn heading toward fruit
+          two.heading.lerp(target, 0.05);
+          two.heading.normalize();
+
+          // Move forward
+          two.pos.add(two.heading.copy().mult(2)); //speed
       }
-      break;
+        break;
 
-    case IDLE:
-      two.pos.x += random(-0.5, 0.5);
-      two.pos.y += random(-0.5, 0.5);
-      break;
+      case IDLE:
+        two.pos.x += random(-0.5, 0.5);
+        two.pos.y += random(-0.5, 0.5);
+        break;
+      }
     }
   }
-}
