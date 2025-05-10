@@ -7,17 +7,18 @@ SubClassSandbox iNeed;
 boolean playerPressedButton = false;
 
 void setup() {
-  size(720, 720);
+  size(1280, 720);
   rectMode(CENTER);
 
   iNeed = new SubClassSandbox();
   fruit = new ArrayList <FruitGenerator>();
   fruitsToRemove = new ArrayList <FruitGenerator>();
   fish = new ArrayList <Fish>();
-  button = new Buttons[1];
+  button = new Buttons[2];
 
   //buttons location and size
   button[0]= new Buttons(width/2, height - 50, 100, 50);
+  button[1]= new Buttons(width/2 - 200, height - 50, 100, 50);
 }
 
 void draw() {
@@ -32,6 +33,8 @@ void draw() {
   if (button[0].iGotTouched && iNeed.onlyTriggerMousePressedOnce()) {
     fish.add(new Fish(random(width), random(height), 25, 25));
     button[0].iGotTouched = false;
+  }
+  if (button[1].iGotTouched && iNeed.onlyTriggerMousePressedOnce()) {
   }
 
   //the fish will always update, whether a fruit exists or not
@@ -61,6 +64,7 @@ void draw() {
       if (iNeed.collisionWithFishAndFruitGenerator(fishOne, fruitOne) || fruitOne.pos.y > height + 100) {
         if (!fruitsToRemove.contains(fruitOne)) {
           fruitsToRemove.add(fruitOne);
+          fishOne.hunger += TAU * 0.5;
         }
       }
 

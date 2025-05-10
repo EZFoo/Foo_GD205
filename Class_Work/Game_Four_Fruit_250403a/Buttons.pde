@@ -21,6 +21,7 @@ class Buttons {
   void update(boolean touchMe) {
     if(touchMe){
     iGotTouched = true;
+    fill(0,0,255);
     }
   }
 }

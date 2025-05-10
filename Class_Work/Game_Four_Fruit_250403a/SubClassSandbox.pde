@@ -4,6 +4,7 @@ enum State {
 }
 
 class SubClassSandbox {
+  PVector target;
   boolean pressed = false;
   State currentState = State.IDLE;
 
@@ -42,22 +43,33 @@ class SubClassSandbox {
     switch(two.currentState) {
     case FEEDING:
       if (one != null) {
-          PVector target = PVector.sub(one.pos, two.pos); // direction to fruit
-          target.normalize();
+        target = PVector.sub(one.pos, two.pos); // direction to fruit
+        target.normalize();
 
-          //turn heading toward fruit
-          two.heading.lerp(target, 0.05);
-          two.heading.normalize();
+        //turn heading toward fruit
+        two.heading.lerp(target, 0.05);
+        two.heading.normalize();
 
-          // Move forward
-          two.pos.add(two.heading.copy().mult(2)); //speed
+        // Move forward
+        two.pos.add(two.heading.copy().mult(2)); //speed
       }
-        break;
+      break;
 
-      case IDLE:
-        two.pos.x += random(-0.5, 0.5);
-        two.pos.y += random(-0.5, 0.5);
-        break;
+    case IDLE:
+      // pick a new idle target when close to the current one
+      if (two.idleTarget == null || PVector.dist(two.pos, two.idleTarget) < 10) {
+        two.idleTarget = new PVector(random(width), random(height));
       }
+
+      // move toward idleTarget
+      PVector idleDirection = PVector.sub(two.idleTarget, two.pos);
+      idleDirection.normalize();
+
+      two.heading.lerp(idleDirection, 0.02);
+      two.heading.normalize();
+
+      two.pos.add(two.heading.copy().mult(1)); // move slow while idle
+      break;
     }
   }
+}
