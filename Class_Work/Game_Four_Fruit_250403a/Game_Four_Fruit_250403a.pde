@@ -4,9 +4,10 @@ ArrayList <Fish> fish;
 Buttons[] button;
 SubClassSandbox iNeed;
 
-boolean playerPressedButton = false;
+boolean playertouchingButton = false;
 
 void setup() {
+  frameRate(60);
   size(1280, 720);
   rectMode(CENTER);
 
@@ -25,7 +26,7 @@ void draw() {
   background(0);
 
   //when player presses mouse make fruit
-  if (mousePressed && !playerPressedButton && iNeed.onlyTriggerMousePressedOnce()) {
+  if (mousePressed && !playertouchingButton && iNeed.onlyTriggerMousePressedOnce()) {
     fruit.add(new FruitGenerator(mouseX, mouseY, 50, 50));
   }
 
@@ -67,7 +68,6 @@ void draw() {
           fishOne.hunger += TAU * 0.5;
         }
       }
-
     } else {
       //if no fruit exist, fish will go idle
       fishOne.currentState = State.IDLE;
@@ -92,14 +92,13 @@ void draw() {
   }
 
   //display and updates buttons
+  playertouchingButton = false;
   for (int i = 0; i < button.length; i++) {
     button[i].display();
-    button[i].update(iNeed.collisionWithButtonAndMouse(button[i]));
-
-    if (iNeed.collisionWithButtonAndMouse(button[i])) {
-      playerPressedButton = true;
-    } else if (!iNeed.collisionWithButtonAndMouse(button[i])) {
-      playerPressedButton = false;
+    boolean touching = iNeed.collisionWithButtonAndMouse(button[i]);
+    button[i].update(touching);
+    if (touching) {
+      playertouchingButton = true;
     }
   }
 }
