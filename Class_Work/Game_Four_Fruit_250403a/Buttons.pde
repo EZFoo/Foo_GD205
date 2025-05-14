@@ -12,7 +12,7 @@ class Buttons {
     sizeX = scaleX;
     sizeY = scaleY;
   }
-  //CONTRUCTORS
+  //METHODS
   void display() {
     fill(150);
     rect(pos.x, pos.y, sizeX, sizeY, 50);

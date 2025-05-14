@@ -1,8 +1,12 @@
 ArrayList <FruitGenerator> fruit;
 ArrayList <FruitGenerator> fruitsToRemove;
 ArrayList <Fish> fish;
+
+Fish fishPrototype;
+
 Buttons[] button;
 SubClassSandbox iNeed;
+UI gameUI;
 
 boolean playertouchingButton = false;
 
@@ -12,9 +16,15 @@ void setup() {
   rectMode(CENTER);
 
   iNeed = new SubClassSandbox();
+  gameUI = new UI();
+
   fruit = new ArrayList <FruitGenerator>();
   fruitsToRemove = new ArrayList <FruitGenerator>();
   fish = new ArrayList <Fish>();
+  
+  //this fish is going to be cloned
+  fishPrototype = new Fish(0, 0, 25, 25);
+
   button = new Buttons[2];
 
   //buttons location and size
@@ -32,9 +42,12 @@ void draw() {
 
   //when player presses button[0] make fish
   if (button[0].iGotTouched && iNeed.onlyTriggerMousePressedOnce()) {
-    fish.add(new Fish(random(width), random(height), 25, 25));
+    Fish newFish = fishPrototype.clone();
+    newFish.pos = new PVector(random(width), random(height));
+    fish.add(newFish);
     button[0].iGotTouched = false;
   }
+
   if (button[1].iGotTouched && iNeed.onlyTriggerMousePressedOnce()) {
   }
 
@@ -101,4 +114,7 @@ void draw() {
       playertouchingButton = true;
     }
   }
+
+  gameUI.display();
+  gameUI.update();
 }

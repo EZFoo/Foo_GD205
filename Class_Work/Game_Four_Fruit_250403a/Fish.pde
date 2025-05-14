@@ -18,7 +18,18 @@ class Fish {
     idleTarget = new PVector(random(width), random(height));
   }
 
-  //CONTRUCTORS
+  //prototype
+  Fish clone() {
+    Fish copy = new Fish(pos.x, pos.y, sizeX, sizeY);
+    copy.heading = heading.copy();
+    copy.idleTarget = idleTarget.copy();
+    copy.hunger = hunger;
+    copy.growth = growth;
+    copy.currentState = currentState;
+    return copy;
+  }
+
+  //METHODS
   void display() {
     pushMatrix();
     translate(pos.x, pos.y); //making this the origin point

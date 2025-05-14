@@ -72,4 +72,10 @@ class SubClassSandbox {
       break;
     }
   }
+
+  void playerStates(boolean notTouching, boolean mouseTrigger) {
+    if (mousePressed && !notTouching && mouseTrigger) {
+      fruit.add(new FruitGenerator(mouseX, mouseY, 50, 50));
+    }
+  }
 }
