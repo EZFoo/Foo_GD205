@@ -62,8 +62,7 @@ void draw() {
     if (gameUI.money >= gameUI.fishDiscountCost) {
       gameUI.money -= gameUI.fishDiscountCost;
       gameUI.fishCost = max(1, gameUI.fishCost - 5);
-
-      // Optional: make upgrades cost more each time
+      
       gameUI.fishDiscountCost += 10;
     }
     button[1].iGotTouched = false;
@@ -75,7 +74,7 @@ void draw() {
       gameUI.money -= gameUI.fruitDiscountCost;
       gameUI.fruitCost = max(1, gameUI.fruitCost - 2);
 
-      // Optional: increase upgrade cost
+
       gameUI.fruitDiscountCost += 5;
     }
     button[2].iGotTouched = false;
@@ -83,7 +82,7 @@ void draw() {
 
 
 
-  //the fish will always update, whether a fruit exists or not
+
   for (int i = fish.size() - 1; i >= 0; i--) {
     Fish fishOne = fish.get(i);
 

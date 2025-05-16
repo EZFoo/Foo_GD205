@@ -55,7 +55,7 @@ class Fish {
     if (hunger > 0) {
       growth += 0.0005;
       // Generate money when full
-      if (frameCount % 60 == 0) { // once per second
+      if (frameCount % 60 == 0) {
         gameUI.money += 2;
       }
     }
