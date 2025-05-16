@@ -48,13 +48,16 @@ class Fish {
   void update() {
     heading.rotate(turnAmount);
 
-    //the fish will get
     growth = constrain(growth, 0.5, 1.5);
     hunger = constrain(hunger, 0, TAU);
-    hunger -= TAU * 0.005;
+    hunger -= TAU * 0.002;
 
     if (hunger > 0) {
-      growth += 0.001;
+      growth += 0.0005;
+      // Generate money when full
+      if (frameCount % 60 == 0) { // once per second
+        gameUI.money += 2;
+      }
     }
   }
 }
