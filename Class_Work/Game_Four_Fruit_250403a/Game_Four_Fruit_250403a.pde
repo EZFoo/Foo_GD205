@@ -7,6 +7,7 @@ Fish fishPrototype;
 Buttons[] button;
 SubClassSandbox iNeed;
 UI gameUI;
+Renderer displaying;
 
 boolean playertouchingButton = false;
 
@@ -17,6 +18,8 @@ void setup() {
 
   iNeed = new SubClassSandbox();
   gameUI = new UI();
+  displaying = new Renderer(1000, 200);
+
 
   fruit = new ArrayList <FruitGenerator>();
   fruitsToRemove = new ArrayList <FruitGenerator>();
@@ -29,8 +32,8 @@ void setup() {
 
   //buttons location and size
   button[0]= new Buttons(width/2, height - 50, 100, 50, "Spawn Fish");
-  button[1]= new Buttons(width/2 - 200, height - 50, 100, 50, "Upgrade Fish Cost");
-  button[2]= new Buttons(width/2 + 200, height - 50, 100, 50, "Upgrade Fruit Cost");
+  button[1]= new Buttons(width/2 - 200, height - 50, 100, 50, "Fish Cost");
+  button[2]= new Buttons(width/2 + 200, height - 50, 100, 50, "Fruit Cost");
 }
 
 void draw() {
@@ -62,7 +65,7 @@ void draw() {
     if (gameUI.money >= gameUI.fishDiscountCost) {
       gameUI.money -= gameUI.fishDiscountCost;
       gameUI.fishCost = max(1, gameUI.fishCost - 5);
-      
+
       gameUI.fishDiscountCost += 10;
     }
     button[1].iGotTouched = false;
@@ -79,9 +82,6 @@ void draw() {
     }
     button[2].iGotTouched = false;
   }
-
-
-
 
   for (int i = fish.size() - 1; i >= 0; i--) {
     Fish fishOne = fish.get(i);
@@ -148,4 +148,7 @@ void draw() {
 
   gameUI.display();
   gameUI.update();
+
+  displaying.display();
+  displaying.update();
 }
